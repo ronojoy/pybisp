@@ -1,4 +1,4 @@
-pybisp : 
+pybisp
 ======
 
 A collection of tools for performing Bayesian parameter estimation and model selection on stochastic processes. The initial roadmap is to implement exact likelihood inference for the most common continuous time stochastic processes
