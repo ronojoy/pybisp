@@ -1,7 +1,7 @@
 pybisp
 ======
 
-A collection of Python tools for performing Bayesian parameter estimation and model selection on stochastic processes. The initial roadmap is to implement exact likelihood inference for the following common continuous time stochastic processes :
+A collection of Python tools for performing Bayesian parameter estimation and model selection for stochastic processes. The initial roadmap is to implement exact likelihood inference for the following common continuous time stochastic processes :
 
 * Wiener process
 * Ornstein-Uhlenbeck process
