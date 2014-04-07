@@ -1,4 +1,4 @@
-pybisp
+[pybisp](http://nbviewer.ipython.org/github/ronojoy/pybisp/tree/master/)
 ======
 
 A collection of Python tools for performing Bayesian parameter estimation and model selection for stochastic processes. The initial roadmap is to implement exact likelihood inference for the following common continuous time stochastic processes :
