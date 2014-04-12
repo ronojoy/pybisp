@@ -11,3 +11,11 @@ A collection of Python tools for performing Bayesian parameter estimation and mo
 These exact likelihood inference methods will serve as a benchmark for approximation schemes for process likelihoods. Model selection and change point detection methods will be implemented after the above methods have been implemented.
 
 Contributions and ideas are welcome!
+
+### Use
+
+```python
+import pybisp as pb
+data = pb.ReadDataFrame('diffusion.csv') # read time series data from csv
+theta = pb.WienerInference(data) # perform inference assuming Wiener process
+```
