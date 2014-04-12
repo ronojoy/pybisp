@@ -9,7 +9,7 @@ A collection of Python tools for performing Bayesian parameter estimation and mo
 and approximate likelihood inference for the parameters of the
 
 * general one-dimensional drift-diffusion process
-* general three-dimensional Brownian dynamics process
+* general three-dimensional Brownian dynamics process with multiplicative noise
 
 Model selection and change point detection methods will be implemented after the above methods have been implemented.
 
