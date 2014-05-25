@@ -24,10 +24,10 @@ dx2 = sum((x[1:] - x[:-1])**2)
 D = np.linspace(0.8,1.2, 1028)
 
 
-class estimation():                                              # class object : estimate
+class Estimation():                                                 # class object : estimate
     
      
-    def __init__(self,posterior,variance):                     # Constructor for the class : Initialisation :
+    def __init__(self,posterior,variance):                          # Constructor for the class : Initialisation :
         self.posterior = posterior
         self.variance = variance
         
@@ -36,11 +36,11 @@ class estimation():                                              # class object 
     def WienerInference(self,data):                                   # Function returns the posterior and variance :
         posterior = -dx2/(2*D*dt) - np.log(D) -0.5*(N-1)*np.log(2*D*np.pi*(dt))
         variance  = -2*(N+1)*(dt)**2/dx    
-        return estimation(posterior,variance)
+        return Estimation(posterior,variance)
     
 
 # 
-x = estimation(posterior,variance)                                  # Instantiate the class :
+x = Estimation(posterior,variance)                                     # Instantiate the class :
 print x.posterior
 print x.variance
 
