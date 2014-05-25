@@ -33,7 +33,7 @@ class estimation():                                              # class object 
         
     
                 
-    def WienerInference(data):                                   # Function returns the posterior and variance :
+    def WienerInference(self,data):                                   # Function returns the posterior and variance :
         posterior = -dx2/(2*D*dt) - np.log(D) -0.5*(N-1)*np.log(2*D*np.pi*(dt))
         variance  = -2*(N+1)*(dt)**2/dx    
         return estimation(posterior,variance)
