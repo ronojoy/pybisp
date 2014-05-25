@@ -34,13 +34,11 @@ class estimation():                                              # class object 
     
                 
     def WienerInference(data):                                   # Function returns the posterior and variance :
+        posterior = -dx2/(2*D*dt) - np.log(D) -0.5*(N-1)*np.log(2*D*np.pi*(dt))
+        variance  = -2*(N+1)*(dt)**2/dx    
         return estimation(posterior,variance)
     
-    
-posterior = -dx2/(2*D*dt) - np.log(D) -0.5*(N-1)*np.log(2*D*np.pi*(dt))
-variance  = -2*(N+1)*(dt)**2/dx    
 
-       
 # 
 x = estimation(posterior,variance)                                  # Instantiate the class :
 print x.posterior
@@ -48,7 +46,7 @@ print x.variance
 
 filename = 'diffusion.csv'   
 data = pb.ReadDataFrame(filename)
-#print data
+print data
 estimate = pb.WienerInference(data)
 print estimate
 
