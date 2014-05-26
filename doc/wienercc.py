@@ -27,7 +27,7 @@ D = np.linspace(0.8,1.2, 1028)
 class Estimation():                                                 # class object : estimate
     
      
-    def __init__(self,posterior,variance):                          # Constructor for the class : Initialisation :
+    def __init__(self,posterior,mean,variance):                          # Constructor for the class : Initialisation :
         self.posterior = posterior
         self.variance = variance
         
@@ -40,7 +40,7 @@ class Estimation():                                                 # class obje
     
 
 # 
-x = Estimation(posterior,variance)                                     # Instantiate the class :
+x = Estimation(posterior,mean,variance)                                     # Instantiate the class :
 print x.posterior
 print x.variance
 
