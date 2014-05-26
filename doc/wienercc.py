@@ -29,6 +29,7 @@ class Estimation():                                                 # class obje
      
     def __init__(self,posterior,mean,variance):                          # Constructor for the class : Initialisation :
         self.posterior = posterior
+        self.mean = mean
         self.variance = variance
         
     
