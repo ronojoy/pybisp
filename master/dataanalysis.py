@@ -1,4 +1,4 @@
-# Data analysis for 
+# Data analysis code for the fluctuating cantilever in a bead medium:
 #
 #
 import numpy as np
