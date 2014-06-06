@@ -12,7 +12,7 @@ from pybisp import WienerInference, OrnsteinUhlenbeckInference
 import matplotlib.pyplot as plt
 
 
-N = 1028
+
 t = arange(N) # sampling times
 dw = np.random.randn(N) # Wiener increments
 x = np.cumsum(dw) # Brownian path
@@ -24,30 +24,32 @@ dx2 = sum((x[1:] - x[:-1])**2)
 D = np.linspace(0.8,1.2, 1028)
 
 
-class Estimation():                                                 # class object : estimate
-    
+class Estimation():                                                          # class object : estimate
+       
      
-    def __init__(self,posterior,mean,variance):                          # Constructor for the class : Initialisation :
-        self.posterior = posterior
-        self.mean = mean
-        self.variance = variance
+    def __init__(self,filename, N):                                          # Constructor for the class : Initialisation :
+        self.filename = filename
+        self.N = N
         
     
                 
-    def WienerInference(self,data):                                   # Function returns the posterior and variance :
-        posterior = -dx2/(2*D*dt) - np.log(D) -0.5*(N-1)*np.log(2*D*np.pi*(dt))
-        variance  = -2*(N+1)*(dt)**2/dx    
-        return Estimation(posterior,mean,variance)
+    def WienerInference(self,N,dx2,dx,dt):                                   # Function returns the posterior and variance :
+        return Estimation(posterior,variance)
     
-
+#
+filename = 'diffusion.csv'
+data = pb.ReadDataFrame(filename)
+print data
 # 
-x = Estimation(posterior,mean,variance)                                     # Instantiate the class :
+x = Estimation('diffusion.csv',50)                                            # Instance
+x.WienerInference(posterior,variance)                                         # Method 
+#
+posterior = -dx2/(2*D*dt) - np.log(D) -0.5*(N-1)*np.log(2*D*np.pi*(dt))
+variance  = -2*(N+1)*(dt)**2/dx 
+x = Estimation(posterior,variance)                                           
 print x.posterior
 print x.variance
 
-filename = 'diffusion.csv'   
-data = pb.ReadDataFrame(filename)
-print data
 estimate = pb.WienerInference(data)
 print estimate
 
