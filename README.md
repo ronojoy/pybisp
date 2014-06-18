@@ -16,6 +16,7 @@ Model selection and change point detection methods will be implemented after the
 * [Calibrating optical tweezers with Bayesian inference](https://www.opticsinfobase.org/oe/fulltext.cfm?uri=oe-21-25-31578&id=276088)
 * [Bayesian Approach to MSD-Based Analysis of Particle Motion in Live Cells](http://www.cell.com/biophysj/abstract/S0006-3495%2812%2900718-7)
 * [Stochastic Elastohydrodynamics of a Microcantilever Oscillating Near a Wall ](http://journals.aps.org/prl/abstract/10.1103/PhysRevLett.96.050801)
+
 Contributions and ideas are welcome!
 
 ### Use
