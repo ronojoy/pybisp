@@ -1,5 +1,11 @@
 #Bayesian inference for the estimation of D and variance in Wiener Process not using CLASS in ipython:
 #
+#
+#This code has been written for the best estimation of D and gamma in the Wiener and OrnsteinUhlenbeck process 
+#just by giving the datafile as an input argument, from which the size of the data (N) can be calculated. 
+#The two functions will then return posterior, mean and variance. This code is only for the estimation of posterior in which the calculation 
+# for mean and variance can be written inside the two functions respectively.
+##
 import numpy as np
 import pandas as pd
 import pybisp as pb
