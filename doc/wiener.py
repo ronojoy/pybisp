@@ -43,7 +43,8 @@ print data1
 #
 data2 = {"sigma":sigma,"gamma":gamma,"dt":dt,"N":N,"x2": x2, "x1":x1}
 print data2
-#Estimate the parameters:(This error part to be rewritten)
+#
+#Estimate the parameters:(This estimate part should be checked)
 #
 estimate = pb.WienerInference(data1)
 print estimate
