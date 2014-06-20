@@ -24,17 +24,17 @@ def WienerInference(data1):
 def OrnsteinUhlenbeckInference(data2):
     return((N/2)*np.log(2*sigma**2*dt)-(1/sigma**2)*(x2-x1*exp(-gamma*dt))**2/2*dt+np.log(1/gamma))
 #
-filename = 'diffusion.csv' # Give the filename(e.g.'diffusion.csv' here) in this line :
-data = pb.ReadDataFrame(filename) # read diffusion time series data from csv :
-print data
+filename = 'diffusion.csv'                       # Give the filename(e.g.'diffusion.csv' here) in this line :
+data = pb.ReadDataFrame(filename)                # read diffusion time series data from csv :
+print data   
 #
-N = len(data) # count the number of data points from a given datafile in which the data size can be counted from the file:
+N = len(data)                                    # count the number of data points from a given datafile in which the data size can be counted from the file:
 print N
 #
 #
-t = arange(N) # sampling times
-dw = np.random.randn(N) # Wiener increments
-x = np.cumsum(dw) # Brownian path
+t = arange(N)                                    # sampling times
+dw = np.random.randn(N)                          # Wiener increments
+x = np.cumsum(dw)                                # Brownian path
 
 dx2 = sum((x[1:] - x[:-1])**2)
 dt = t[1] - t[0]
@@ -48,10 +48,10 @@ x2 = x[1:]
 #print dx2
 #
 #
-data1 = {"N":N,"dx2": dx2, "D":D,"dt":dt, "dx":dx} # Initialise the parameters values here :
+data1 = {"N":N,"dx2": dx2, "D":D,"dt":dt, "dx":dx} # Initialise the parameters values for wiener process here :
 print data1
 #
-data2 = {"sigma":sigma,"gamma":gamma,"dt":dt,"N":N,"x2": x2, "x1":x1}
+data2 = {"sigma":sigma,"gamma":gamma,"dt":dt,"N":N,"x2": x2, "x1":x1} #Initialise the parameter values for ornstein-uhlenbeck process here:
 print data2
 #
 #Estimate the parameters:(This estimate part should be checked)
