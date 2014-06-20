@@ -49,7 +49,7 @@ print data2
 estimate = pb.WienerInference(data1)
 print estimate
 #
-plot(D, WienerInference(data1),'r',lw=2)
+plot(D, WienerInference(data1),'r.',lw=2)
 #plot(gamma, OrnsteinUhlenbeckInference(data2),'r',lw=2)
 #
 xlabel('D')
