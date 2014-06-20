@@ -35,6 +35,10 @@ dt = t[1] - t[0]
 dx = sum((x[1:] - x[:-1])**4)
 dx2 = sum((x[1:] - x[:-1])**2)
 D = np.linspace(0.8,1.2, 1028)
+sigma = 0.01
+gamma = np.linspace(0.2,3.9, N-1)
+x1 = (x[:-1])
+x2 = x[1:]
 #print dx2
 #
 #
