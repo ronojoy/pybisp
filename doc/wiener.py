@@ -13,9 +13,7 @@ def ReadDataFrame(filename):
     return pd.read_csv(filename)
 
 def WienerInference(data1):
-    posterior = -dx2/(2*D*dt) - np.log(D) -0.5*(N-1)*np.log(2*D*np.pi*(dt))
-    variance = -2*(N+1)*(dt)**2/dx
-    return (posterior,variance)
+    return -dx2/(2*D*dt) - np.log(D) -0.5*(N-1)*np.log(2*D*np.pi*(dt))
 #
 #
 filename = 'diffusion.csv'                    # Give the filename(e.g.'diffusion.csv' here) in this line :
