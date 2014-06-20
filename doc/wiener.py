@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 def ReadDataFrame(filename):
     return pd.read_csv(filename)
 
-def WienerInference(data2):
+def WienerInference(data1):
     posterior = -dx2/(2*D*dt) - np.log(D) -0.5*(N-1)*np.log(2*D*np.pi*(dt))
     variance = -2*(N+1)*(dt)**2/dx
     return (posterior,variance)
@@ -20,10 +20,9 @@ def WienerInference(data2):
 #
 filename = 'diffusion.csv'                    # Give the filename(e.g.'diffusion.csv' here) in this line :
 data = pb.ReadDataFrame(filename)             # read diffusion time series data from csv :
-data1 = pd.read_csv(filename)
-print data1
+print data
 #
-N = len(data1)                                 # count the number of data points from a given datafile in which the data size can be counted from the file:
+N = len(data)                                 # count the number of data points from a given datafile in which the data size can be counted from the file:
 print N
 #
 #
@@ -39,12 +38,12 @@ D = np.linspace(0.8,1.2, 1028)
 #print dx2
 #
 #
-data2 = {"N":N,"dx2": dx2, "D":D,"dt":dt, "dx":dx}      # Initialise the parameters values here :
-print data2
+data1 = {"N":N,"dx2": dx2, "D":D,"dt":dt, "dx":dx}      # Initialise the parameters values here :
+print data1
 #
 #Estimate the parameters:(This error part to be rewritten)
 #
-estimate = pb.WienerInference(data2)
+estimate = pb.WienerInference(data1)
 print estimate
 #
 
