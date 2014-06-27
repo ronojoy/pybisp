@@ -1,5 +1,5 @@
 # Estimating approximate likelihood inference for the parameters of the one dimensional drift-diffusion process:
-# This work is under progress:
+# 
 #
 {
  "metadata": {
