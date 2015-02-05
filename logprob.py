@@ -1,5 +1,5 @@
-import numpy as np
 from __future__ import division
+import numpy as np
 
 def wiener(D, dx2, dt, N):
       return -dx2/(2*D*dt) - np.log(D) -0.5*(N-1)*np.log(2*D*np.pi*(dt))
