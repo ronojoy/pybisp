@@ -1,14 +1,15 @@
 from __future__ import division
 import numpy as np
 
-def wiener(D, data, dt):
-      N = np.len(data)
+def wiener(theta, data, dt):
+      N = data.size
+      D = theta
       dx = np.diff(data)
       dx2 = np.sum(dx*dx)
       return -dx2/(2*D*dt) - np.log(D) -0.5*(N-1)*np.log(2*D*np.pi*(dt))
 
 def oup(theta, data, dt, a):
-      N = np.len(data)
+      N = data.size
       a2 = a*a
       gamma, D = theta[0], theta[1]
       dx = data[1:] - np.exp(-gamma)*data[-1:]
