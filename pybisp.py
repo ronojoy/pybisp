@@ -1,20 +1,49 @@
 from __future__ import division
 import numpy as np
+immport matplotlib.pyplot as plt
 
-def wiener(theta, data, dt):
-      N = data.size
-      D = theta
-      dx = np.diff(data)
-      dx2 = np.sum(dx*dx)
-      return -dx2/(2*D*dt) - np.log(D) -0.5*(N-1)*np.log(2*D*np.pi*(dt))
+class WienerProcess:
 
-def oup(theta, data, dt, a):
-      N = data.size
-      a2 = a*a
-      gamma, D = theta[0], theta[1]
-      dx = data[1:] - np.exp(-gamma)*data[-1:]
-      dx2 = np.sum(dx*dx)
-      B = 1 - np.exp(-2*gamma)
-      return 0.5*(N-1)*np.log(gamma/(2*np.pi*D*B*a2)) - gamma *dx2/(2*D*I*a2)
+      def __init__(self, path):
+        self.path = path
 
+      def setPrior(self, prior):
+        '''priors for parameters'''
 
+      def logProb(self,theta):
+        '''analytical expression for the logarithm of the posterior'''
+
+      def mapEstimate(self, method):
+        '''analytical or numerical maximum aposteriori estimate of parameters'''
+
+      def normalEstimate(self):
+        '''analytical estimate of parameters assuming asymptotic normality'''
+
+      def posteriorInterval(self, percent):
+        '''domain containing p percent of the probability'''
+
+      def plotLogProb(self, extent):
+        '''plot of the posterior probability'''
+
+class OrnsteinUhlenbeckProcess:
+
+      def __init__(self, path):
+        self.path = path
+
+      def setPrior(self, prior):
+        '''priors for parameters'''
+
+      def logProb(self,theta):
+        '''analytical expression for the logarithm of the posterior'''
+
+      def mapEstimate(self, method):
+        '''analytical or numerical maximum aposteriori estimate of parameters'''
+
+      def normalEstimate(self):
+        '''analytical estimate of parameters assuming asymptotic normality'''
+
+      def posteriorInterval(self, percent):
+        '''domain containing p percent of the probability'''
+
+      def plotLogProb(self, extent):
+        '''plot of the posterior probability'''
