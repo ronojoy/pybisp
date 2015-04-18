@@ -10,12 +10,15 @@ class WienerProcess:
       def setPrior(self, prior):
         '''priors for parameters'''
 
-      def logLikelihood(self, theta):
-        '''analytical expression for the logarithm of the likelihood'''
-        N = self.path.shape[0] 
-        dt = self.path[0, 1] - self.path[0, 0]
-        dx2 = sum((self.path[1, 1:] - self.path[1, :-1])**2)
-        #Wiener process likelihood
+      def logProb(self, theta):
+        '''analytical expression for the logarithm of the posterior'''
+        N = np.size(self.path[:, 1])
+        x= self.path[:,0]
+        t = self.path[:,1]
+        dt = t[1] -t[0]
+       # dx2 = sum((self.path[0, 1:] - self.path[0, :-1])**2)
+        dx2=sum((x[1:] - x[:-1])**2)
+        
         s = -dx2/(4*theta*dt) - np.log(theta)-0.5*(N-1)*np.log(4*theta*np.pi*(dt))
         return s
 
@@ -29,17 +32,17 @@ class WienerProcess:
       def posteriorInterval(self, percent):
         '''domain containing p percent of the probability'''
 
-      def plotLogProb(self, theta):
+      def plotLogProb(self, extent):
         '''plot of the posterior probability'''
-        logP = np.zeros_like(theta) 
+        th = extent*0     # initializing x to be zeros of same size as extent
+        
+        for i in range(np.size(extent)):
+            '''call logProb method and update x'''
+            th[i] = self.logProb(extent[i])
 
-        for i in range(np.size(theta)):
-            '''call logProb method'''
-            logP[i] = self.logProb(theta[i])
-
-        #plot logProb against theta 
-        plt.plot(theta, logP)
-        plt.xlabel('theta')
+        #plotting logProb with extent
+        plt.plot(extent, th)
+        plt.xlabel('Theta')
         plt.ylabel('logProb')
         plt.show()
 
