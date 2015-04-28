@@ -3,13 +3,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class WienerProcess:
-
+   
       def __init__(self, path):
         self.path = path
 
-      def setPrior(self, prior):
+      def setPrior(self, theta):
         '''priors for parameters'''
-
+        sP = - np.log(theta)
+        return sP
       def logProb(self, theta):
         '''analytical expression for the logarithm of the posterior'''
         N = np.size(self.path[:, 1])
@@ -19,15 +20,22 @@ class WienerProcess:
        # dx2 = sum((self.path[0, 1:] - self.path[0, :-1])**2)
         dx2=sum((x[1:] - x[:-1])**2)
         
-        s = -dx2/(4*theta*dt) - np.log(theta)-0.5*(N-1)*np.log(4*theta*np.pi*(dt))
-        return s
-
+        lP = -dx2/(2*theta*theta*dt)  - np.log(theta)-0.5*(N-1)*np.log(2*theta*theta*np.pi*dt)
+        return lP
+   
 
       def mapEstimate(self, method):
         '''analytical or numerical maximum aposteriori estimate of parameters'''
 
       def normalEstimate(self):
         '''analytical estimate of parameters assuming asymptotic normality'''
+        N = np.size(self.path[:, 1])
+        x= self.path[:,0]
+        t = self.path[:,1]
+        dt = t[1] -t[0]
+        sigma = np.sqrt(np.sum((x[1:]-x[:-1])**2)/(dt*(N+1)))
+        return sigma
+        print (sigma)   
 
       def posteriorInterval(self, percent):
         '''domain containing p percent of the probability'''
@@ -72,6 +80,14 @@ class OrnsteinUhlenbeckProcess:
 
       def normalEstimate(self):
         '''analytical estimate of parameters assuming asymptotic normality'''
+        N = np.size(self.path[:, 1])
+        x= self.path[:,0]
+        t = self.path[:,1]
+        dt = t[1] -t[0]
+        mu =( 1/dt)*np.log((np.sum(x[0:]**2)/N)/(np.sum(x[1:]*x[:-1])/N))
+        sigma = np.sqrt(2*(mu*(np.sum((x[1:]-x[:-1]*np.exp(-mu*dt))**2)/N)/(1-np.exp(-2*mu*dt))))
+        return mu, sigma
+        print (mu,sigma)        
 
       def posteriorInterval(self, percent):
         '''domain containing p percent of the probability'''
