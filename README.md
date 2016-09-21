@@ -31,5 +31,5 @@ data = pb.ReadDataFrame('samplepath.csv') # read time series data
 ou = pb.ou.Inference(data)                # inference assuming Ornstein-Uhlenbeck process 
 theta = ou.mapEstimate()                  # get maximum aposteriori parameter estimate
 dtheta = ou.erroBar() 			              # get error bar of the MAP estimate
-wp.plotLogProb()  			                  # plot the log posterior around the MAP estimate 
+ou.plotLogProb()  			                  # plot the log posterior around the MAP estimate 
 ```
