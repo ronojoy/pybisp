@@ -27,8 +27,9 @@ Contributions and ideas are welcome!
 ```python
 import pybisp as pb
 import pandas as pd
-data = pb.ReadDataFrame('diffusion.csv') # read diffusion time series data from csv
-inference = pb.WienerProcess(data) # inference assuming data to be a Wiener process
-inference.SetPrior('noninformative') # set a non-informative prior
-thetahat = inference.MapEstimate()  # get maximum aposteriori parameter estimates
+data = pb.ReadDataFrame('diffusion.csv')  # read diffusion time series data from csv
+wp = pb.WienerProcess.Inference(data)     # inference assuming data to be a Wiener process
+theta = wp.mapEstimate()                  # get maximum aposteriori parameter estimate
+dtheta = wp.erroBar() 			  # get error bar of the MAP estimate
+wp.plotLogProb()  			  # plot the log posterior around the MAP estimate 
 ```
