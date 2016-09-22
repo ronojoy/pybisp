@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-class inference:
+class Inference:
     '''Inference of the stiffness k of a harmonic potential from the histogram
        of positions of a Brownian particle confined in that potential'''
     
@@ -54,12 +54,22 @@ class inference:
         return sigma0
 
 
-    def plotLogProb(self):
+    def plotLogProb(self, interval=3):
+        ''' plot the log posterior in a Bayesian credible interval, chosen by default as 3 sigma'''
         
-        k0 = self.mapEstimate()
-        sigma0 = self.errorBar()
+        k0  = self.mapEstimate()
+        dk0 = self.errorBar()
 
-        k = np.linspace(k0 - 5*sigma0, k0 + 5*sigma0, 128)
-        lp = self.logprob(k)
+        k = np.linspace(k0 - interval*dk0, k0 + interval*dk0, 128)
+        lp = self.logProb(k)
 
-        plt.plot(k, lp)
+        plt.plot(k, lp, color='blue')
+        plt.plot(k0, self.logProb(k0), 'o', color='red')
+        plt.grid()
+        plt.axvspan(k0-3*dk0, k0 + 3*dk0, alpha=0.1, color = 'black')
+        plt.axvspan(k0-2*dk0, k0 + 2*dk0, alpha=0.2, color = 'black')
+        plt.axvspan(k0-1*dk0, k0 + 1*dk0, alpha=0.3, color = 'black')
+        plt.xlabel('k/k_BT')
+        plt.ylabel('log posterior')
+        plt.show()
+
