@@ -60,16 +60,18 @@ class Inference:
         k0  = self.mapEstimate()
         dk0 = self.errorBar()
 
+        eps = 0.001 # offset for plotting
         k = np.linspace(k0 - interval*dk0, k0 + interval*dk0, 128)
-        lp = self.logProb(k)
-
+        lp = self.logProb(k) - self.logProb(k0) + eps
+        
+        #plt.rc('text', usetex=True)
         plt.plot(k, lp, color='blue')
-        plt.plot(k0, self.logProb(k0), 'o', color='red')
+        plt.plot(k0, 0, 'o', color='red')
         plt.grid()
         plt.axvspan(k0-3*dk0, k0 + 3*dk0, alpha=0.1, color = 'black')
         plt.axvspan(k0-2*dk0, k0 + 2*dk0, alpha=0.2, color = 'black')
         plt.axvspan(k0-1*dk0, k0 + 1*dk0, alpha=0.3, color = 'black')
-        plt.xlabel('k/k_BT')
-        plt.ylabel('log posterior')
+        plt.xlabel('$k/k_BT$')
+        plt.ylabel('$\Delta$ log posterior')
         plt.show()
 
