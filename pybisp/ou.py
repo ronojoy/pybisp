@@ -114,8 +114,39 @@ class Inference:
         coefficient'''
         pass
 
-    def plotLogProb(self, ll, dd):
-        pass
+    def plotLogProb(self, L, D, level=-9.21, gridN=64):
+        ''' plotting log prob based on chi squared test'''
+        
+        ''' determine bounds of L''' 
+        from scipy import optimize
+        def rhsL(r):
+            v = self.logProb(r, D) - self.logProb(L, D)-level
+            return v
+        r=L*1.01
+        sol = optimize.root(rhsL, r, method='krylov')
+        dL=1.4*np.abs(L-sol.x)
+
+        ''' determine bounds of D''' 
+        def rhsD(r):
+            v = self.logProb(L, r) - self.logProb(L, D)-level
+            return v
+        r=D*1.01
+        sol = optimize.root(rhsD, r, method='krylov')
+        dD=1.4*np.abs(D-sol.x)
+         
+        xx = np.linspace(L-dL, L+dL, gridN)  
+        yy = np.linspace(D-dD, D+dD, gridN)  
+        LL, DD = np.meshgrid(xx, yy)
+        lp = self.logProb(LL, DD) - self.logProb(L, D)
+
+        c = plt.contourf(LL, DD, lp, cmap=plt.cm.bone);plt.plot(L, D, 'ro', markersize=12)
+        plt.contour(LL, DD, lp, [level], hold='on')
+        plt.xlabel('$\lambda$')
+        plt.ylabel('$D$');  
+        plt.colorbar(c)
+        plt.show()
+        
+        return
 
     def plotPath(self):
         '''plot sample path as a time series'''
