@@ -70,10 +70,10 @@ class Inference:
         b = 1.0 - np.exp(-2.0*L*dt)
 
         # log likelihood
-        ll1 = ((N-1)/2)*np.log(L/2.0*np.pi*D*b)
-        ll2 = (L/2.0*D*b)*(T1 - 2.0*T2*a + T3*a*a)
+        ll1 = ((N-1)/2)*np.log(L/(2.0*np.pi*D*b))
+        ll2 = (L/(2.0*D*b))*(T1 - 2.0*T2*a + T3*a*a)
         ll3 = 0.5 * np.log(L/(2.0*np.pi*D))
-        ll4 = (L/2.0*D)*x[0]*x[0]
+        ll4 = (L/(2.0*D))*T4
         ll = ll1 - ll2 + ll3 - ll4
 
         # log prior
