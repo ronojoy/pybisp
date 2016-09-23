@@ -114,13 +114,16 @@ class Inference:
         coefficient'''
         pass
 
-    def plotLogProb(self, L, D, level=-9.21, gridN=64):
+    def plotLogProb(self, L, D, level=[60, 90, 99], gridN=64):
         ''' plotting log prob based on chi squared test'''
-        
+      
+        from scipy import stats, optimize
+        maxpValue = stats.chi2.ppf(q=0.01*np.max(level), df = 2)
+        chiSq = np.zeros(len(level), dtype=float)
+
         ''' determine bounds of L''' 
-        from scipy import optimize
         def rhsL(r):
-            v = self.logProb(r, D) - self.logProb(L, D)-level
+            v = self.logProb(r, D) - self.logProb(L, D)+maxpValue
             return v
         r=L*1.01
         sol = optimize.root(rhsL, r, method='krylov')
@@ -128,7 +131,7 @@ class Inference:
 
         ''' determine bounds of D''' 
         def rhsD(r):
-            v = self.logProb(L, r) - self.logProb(L, D)-level
+            v = self.logProb(L, r) - self.logProb(L, D)+maxpValue
             return v
         r=D*1.01
         sol = optimize.root(rhsD, r, method='krylov')
@@ -139,10 +142,16 @@ class Inference:
         LL, DD = np.meshgrid(xx, yy)
         lp = self.logProb(LL, DD) - self.logProb(L, D)
 
-        c = plt.contourf(LL, DD, lp, cmap=plt.cm.bone);plt.plot(L, D, 'ro', markersize=12)
-        plt.contour(LL, DD, lp, [level], hold='on')
-        plt.xlabel('$\lambda$')
-        plt.ylabel('$D$');  
+        c = plt.contourf(LL, DD, lp, cmap=plt.cm.bone);
+        plt.plot(L, D, 'o', color="#A60628", markersize=12)
+        
+        ''' plot contours'''
+        for i in range(np.size(level)):
+            chiSq[i] = -stats.chi2.ppf(.01*level[i],df = 2)
+        chiSq.sort()
+        plt.contour(LL, DD, lp, chiSq, hold='on')
+        plt.xlabel('$\lambda$', fontsize=20)
+        plt.ylabel('$D$',       fontsize=20);  
         plt.colorbar(c)
         plt.show()
         
