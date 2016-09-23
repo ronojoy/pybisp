@@ -142,17 +142,17 @@ class Inference:
         LL, DD = np.meshgrid(xx, yy)
         lp = self.logProb(LL, DD) - self.logProb(L, D)
 
-        c = plt.contourf(LL, DD, lp, cmap=plt.cm.bone);
+        c = plt.contourf(LL, DD, lp, cmap=plt.cm.bone)
         plt.plot(L, D, 'o', color="#A60628", markersize=12)
+        plt.colorbar(c)
         
-        ''' plot contours'''
+        ''' plot contours at given chiSq values'''
         for i in range(np.size(level)):
             chiSq[i] = -stats.chi2.ppf(.01*level[i],df = 2)
         chiSq.sort()
         plt.contour(LL, DD, lp, chiSq, hold='on')
         plt.xlabel('$\lambda$', fontsize=20)
-        plt.ylabel('$D$',       fontsize=20);  
-        plt.colorbar(c)
+        plt.ylabel('$D$',       fontsize=20)  
         plt.show()
         
         return
