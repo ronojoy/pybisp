@@ -30,8 +30,14 @@ LL, DD = np.meshgrid(np.linspace(L - 40, L + 40, 256), np.linspace(D - 0.01, D +
 lp = ou.logProb(LL, DD) - ou.logProb(L, D)
 
 c = plt.contourf(LL, DD, lp, cmap=plt.cm.gray);
-plt.plot(L, D, 'o', color="#A60628", markersize=9)
-#plt.plot(35.2*np.pi*2, .16521 , 's',  color="#348ABD", markersize=9)
+plt.plot(L, D, 'o', color="#A60628", markersize=12)
+
+f_c = 39.2; L_exp=f_c*np.pi*2
+D_exp = 0.17;
+print L, D
+print 
+print L_exp, D_exp
+plt.plot(L_exp, D_exp, 's',  color="#348ABD", markersize=12)
 #c = plt.contourf(LL, DD, lp/(np.max(np.abs(lp))), 8, cmap=plt.cm.gray);plt.plot(L, D, 'ro')
 #plt.colorbar(c, orientation='horizontal')
 
