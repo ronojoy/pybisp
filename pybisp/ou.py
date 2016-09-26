@@ -109,10 +109,45 @@ class Inference:
 
         return L0, D0, k0
 
-    def errorBar(self):
+    def errorBar(self, L, D):
         '''error bars of the MAP estimates of the mean regression rate and diffusion
         coefficient'''
-        pass
+        dt = self.dt
+        N  = self.N
+ 
+        T1 = self.T1
+        T2 = self.T2
+        T3 = self.T3
+        T4 = self.T4
+ 
+        a = np.exp(-L*dt)
+        b = 1.0 - np.exp(-2.0*L*dt)
+        D2 = D*D;  L2 = L*L;   b2 = b*b;
+        D3 = D2*D; L3 = L2*L;  b3 = b3*b;
+ 
+        del2 = (T1 - 2.0*T2*a + T3*a*a) 
+        ddp  = (T2 - a*T3)*dt*a               # derivative of delta and delta
+        dpdp = dt*dt*a*a*T3
+        dppd = -dt*dt*a*(T2 - a*T3)
+        bP   = 2*dt*a*a                       #derivative of b wrt L
+        bPP  = -2*dt*bP                       #double derivative wrt L
+
+        dbP  = 2*ddp/b - bP*del2/b2
+        dbPP = 2*(dpdp+dppd)/b - 4*ddp*bP/b2 - bPP*del2/b2 + 2*bP*bP*del2/b3
+        nn   = (N-1)/2
+ 
+        h11 = nn/D2 - (L/D3)*(del2/b-T4)  + 0.5/D2
+        h12 = del2/(2*D2*b) + L/(2*D2)*dbP + 0.5*T4/D2
+        h22 = nn*(-1/L2 + bP*bP/b2 - bPP/b) - 0.5/L2  - dbp/D - 0.5*L*dbPP/D
+ 
+        from numpy import linalg as LA 
+        J=np.zeros((2, 2), dtype=float)
+        J[0, 0] = h11 
+        J[0, 1] = h12
+        J[1, 0] = h12
+        J[1, 1] = h22
+        eigVals, eigVecs = LA.eig(J)
+        return 1/eigVals
 
     def plotLogProb(self, L, D, level=[60, 90, 99], gridN=64):
         ''' plotting log prob based on chi squared test'''

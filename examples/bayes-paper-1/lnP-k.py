@@ -14,6 +14,7 @@ import pybisp as pb
 datafile='optical-trap-dataset2.xlsx'
 data = pd.ExcelFile(datafile).parse()
 sample_path = data.values
+#print np.size(sample_path)
 
 # set some useful parameters
 dt = 1.0/1500; t = np.arange(0, data.size*dt, dt)
