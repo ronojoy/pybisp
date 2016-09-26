@@ -142,12 +142,12 @@ class Inference:
  
         from numpy import linalg as LA 
         J=np.zeros((2, 2), dtype=float)
-        J[0, 0] = h11 
-        J[0, 1] = h12
-        J[1, 0] = h12
-        J[1, 1] = h22
+        J[0, 0] = -h11 
+        J[0, 1] = -h12
+        J[1, 0] = -h12
+        J[1, 1] = -h22
         eigVals, eigVecs = LA.eig(J)
-        return 1/np.abs(eigVals)
+        return 1/eigVals
 
     def plotLogProb(self, L, D, level=[60, 90, 99], gridN=64):
         ''' plotting log prob based on chi squared test'''

@@ -23,10 +23,10 @@ plt.plot(laserP, PSD, '*-', color="#348ABD" , ms=10, label='PSD')
 plt.errorbar(laserP, PSD, errPSD, color="#348ABD")
 
 
-plt.plot(laserP, bayes2, 's-', color="g", markersize=6, label='Bayes 2' )
+plt.plot(laserP, bayes2, 's-', color="g", markersize=6, label='Bayes $II$' )
 plt.errorbar(laserP, bayes2, ebayes2, color="g")
 
-plt.plot(laserP, bayes1, 'o-', mfc='none', markersize=11, mec="#A60628", mew=1.4, color="#A60628", label='Bayes I')
+plt.plot(laserP, bayes1, 'o-', mfc='none', markersize=11, mec="#A60628", mew=1.4, color="#A60628", label='Bayes $I$')
 plt.errorbar(laserP, bayes1, ebayes1, color="#A60628")
 
 plt.xlabel('Laser power (mW)', fontsize=24)
