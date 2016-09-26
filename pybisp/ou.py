@@ -123,7 +123,7 @@ class Inference:
         a = np.exp(-L*dt)
         b = 1.0 - np.exp(-2.0*L*dt)
         D2 = D*D;  L2 = L*L;   b2 = b*b;
-        D3 = D2*D; L3 = L2*L;  b3 = b3*b;
+        D3 = D2*D; L3 = L2*L;  b3 = b2*b;
  
         del2 = (T1 - 2.0*T2*a + T3*a*a) 
         ddp  = (T2 - a*T3)*dt*a               # derivative of delta and delta
@@ -136,9 +136,9 @@ class Inference:
         dbPP = 2*(dpdp+dppd)/b - 4*ddp*bP/b2 - bPP*del2/b2 + 2*bP*bP*del2/b3
         nn   = (N-1)/2
  
-        h11 = nn/D2 - (L/D3)*(del2/b-T4)  + 0.5/D2
+        h11 = nn*(-1/L2 + bP*bP/b2 - bPP/b) - 0.5/L2  - dbP/D - 0.5*L*dbPP/D
         h12 = del2/(2*D2*b) + L/(2*D2)*dbP + 0.5*T4/D2
-        h22 = nn*(-1/L2 + bP*bP/b2 - bPP/b) - 0.5/L2  - dbp/D - 0.5*L*dbPP/D
+        h22 = nn/D2 - (L/D3)*(del2/b-T4)  + 0.5/D2
  
         from numpy import linalg as LA 
         J=np.zeros((2, 2), dtype=float)
@@ -147,7 +147,7 @@ class Inference:
         J[1, 0] = h12
         J[1, 1] = h22
         eigVals, eigVecs = LA.eig(J)
-        return 1/eigVals
+        return 1/np.abs(eigVals)
 
     def plotLogProb(self, L, D, level=[60, 90, 99], gridN=64):
         ''' plotting log prob based on chi squared test'''

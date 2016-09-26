@@ -16,22 +16,22 @@ bayes2 = [1.10, 2.23, 3.88, 4.16, 4.48, 4.83]
 
 e2=0.00577
 errPSD  = [0.15*1.30, 0.12*2.40, 0.15*3.99, 0.19*4.25, 0.25*4.40, 0.25*4.67] 
-ebayes1 = [0.10*1.10, 0.12*2.23, 0.15*3.88, 0.15*4.16, 0.19*4.48, 0.20*4.83]
+ebayes1 = [e2*1.10, e2*2.23, e2*3.88, e2*4.16, e2*4.48, e2*4.83]
 ebayes2 = [e2*1.10, e2*2.23, e2*3.88, e2*4.16, e2*4.48, e2*4.83]
 
-plt.plot(laserP, PSD, 'o-', color="#348ABD" )
-plt.errorbar(laserP, PSD, errPSD, color="#348ABD", label='PSD')
+plt.plot(laserP, PSD, '*-', color="#348ABD" , ms=10, label='PSD')
+plt.errorbar(laserP, PSD, errPSD, color="#348ABD")
 
 
-plt.plot(laserP, bayes2, 's-', color="k", markersize=6 )
-plt.errorbar(laserP, bayes2, ebayes2, color="k", label='Bayes 2')
+plt.plot(laserP, bayes2, 's-', color="g", markersize=6, label='Bayes 2' )
+plt.errorbar(laserP, bayes2, ebayes2, color="g")
 
-plt.plot(laserP, bayes1, 'o', mfc='none', markersize=10)
-plt.errorbar(laserP, bayes1, ebayes1, color="#A60628", label='Bayes I')
+plt.plot(laserP, bayes1, 'o-', mfc='none', markersize=11, mec="#A60628", mew=1.4, color="#A60628", label='Bayes I')
+plt.errorbar(laserP, bayes1, ebayes1, color="#A60628")
 
 plt.xlabel('Laser power (mW)', fontsize=24)
 plt.ylabel('k$(\mu Nm^{-1}$) ', fontsize=24);
-plt.xticks(np.arange(9, 40, 7), fontsize=20)
+plt.xticks(np.arange(8, 40, 7), fontsize=20)
 plt.yticks(np.arange(1, 5.2, 1), fontsize=20)
 plt.gcf().subplots_adjust(bottom=0.05)
 plt.tight_layout()
