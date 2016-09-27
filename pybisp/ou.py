@@ -147,7 +147,7 @@ class Inference:
         J[1, 0] = -h12
         J[1, 1] = -h22
         eigVals, eigVecs = LA.eig(J)
-        return 1/eigVals
+        return 1.0/eigVals
 
     def plotLogProb(self, L, D, level=[60, 90, 99], gridN=64):
         ''' plotting log prob based on chi squared test'''
