@@ -37,7 +37,7 @@ D_exp = 0.17;
 print L, D
 print 
 print L_exp, D_exp
-plt.plot(L_exp, D_exp, 's',  color="#348ABD", markersize=12)
+#plt.plot(L_exp, D_exp, 's',  color="#348ABD", markersize=12)
 #c = plt.contourf(LL, DD, lp/(np.max(np.abs(lp))), 8, cmap=plt.cm.gray);plt.plot(L, D, 'ro')
 #plt.colorbar(c, orientation='horizontal')
 
@@ -61,5 +61,5 @@ plt.yticks(np.arange(0.165, 0.181, 0.005), fontsize=20)
 plt.gcf().subplots_adjust(bottom=0.15)
 plt.tight_layout()
 
-#plt.savefig('pybispFig1.jpg', dpi=256)
+plt.savefig('pybispFig1.jpg', dpi=256)
 plt.show()
