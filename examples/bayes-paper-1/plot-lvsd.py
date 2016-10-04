@@ -46,7 +46,7 @@ levels = [-2.41, -4.60, -9.21]
 levels.sort()
 CS=plt.contour(LL, DD, lp, levels, cmap=plt.cm.RdBu)
 fmt = {}
-strs = [ '99%', '90%', '70%', '54%', '54%' ]
+strs = [ '99%', '90%', '70%']
 for l,s in zip( CS.levels, strs ):
     fmt[l] = s
 
