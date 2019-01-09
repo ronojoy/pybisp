@@ -150,7 +150,9 @@ class Inference:
         return 1.0/eigVals
 
     def plotLogProb(self, L, D, level=[60, 90, 99], gridN=64):
-        ''' plotting log prob based on chi squared test'''
+        ''' plotting log prob based on chi squared distribution,
+        using the fact that (x − μ)′Σ−1(x − μ) = χ^2
+        '''
       
         from scipy import stats, optimize
         maxpValue = stats.chi2.ppf(q=0.01*np.max(level), df = 2)
@@ -177,13 +179,13 @@ class Inference:
         LL, DD = np.meshgrid(xx, yy)
         lp = self.logProb(LL, DD) - self.logProb(L, D)
 
-        c = plt.contourf(LL, DD, lp, cmap=plt.cm.bone)
+        c = plt.contourf(LL, DD, lp, cmap=plt.cm.RdBu)
         plt.plot(L, D, 'o', color="#A60628", markersize=12)
         plt.colorbar(c)
         
         ''' plot contours at given chiSq values'''
         for i in range(np.size(level)):
-            chiSq[i] = -stats.chi2.ppf(.01*level[i],df = 2)
+            chiSq[i] = -0.5*stats.chi2.ppf(.01*level[i],df = 2)
         chiSq.sort()
         plt.contour(LL, DD, lp, chiSq, hold='on')
         plt.xlabel('$\lambda$', fontsize=20)
