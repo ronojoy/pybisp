@@ -196,5 +196,5 @@ class Inference:
 
     def plotPath(self):
         '''plot sample path as a time series'''
-        t = np.arange(0, dt*N, dt)
+        t = np.arange(0, self.dt*self.N, self.dt)
         plt.plot(t, self.x)
