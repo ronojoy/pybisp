@@ -32,7 +32,8 @@ python setup.py install
 import pybisp as pb
 import pandas as pd
 data = pb.ReadDataFrame('samplepath.csv') # read time series data 
-ou = pb.ou.Inference(data)                # inference assuming Ornstein-Uhlenbeck process 
+dt = 1                                    # choose some dt to use  
+ou = pb.ou.Inference(data,dt)                # inference assuming Ornstein-Uhlenbeck process 
 theta = ou.mapEstimate()                  # get maximum aposteriori parameter estimate
 dtheta = ou.erroBar() 			           # get error bar of the MAP estimate
 ou.plotLogProb()  			               # plot the log posterior around the MAP estimate 
